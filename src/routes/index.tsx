@@ -1,19 +1,63 @@
 import { Title } from "solid-start";
-import Counter from "~/components/Counter";
+import { createQuery, useQueryClient } from "@adeora/solid-query";
+import { createSignal, For, Suspense } from "solid-js";
+
+interface PostData {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 
 export default function Home() {
+  const [postId, setPostId] = createSignal(1);
+
+  const query = createQuery(() => ({
+    queryKey: ["posts", postId()],
+    queryFn: async ({ queryKey }) => {
+      const id = queryKey[1];
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts/" + postId()
+      ).then((res) => res.json());
+      return [response] as PostData[];
+    },
+  }));
+
   return (
     <main>
-      <Title>Hello World</Title>
-      <h1>Hello world!</h1>
-      <Counter />
+      <Title>Solid Query v5</Title>
+      <h1>Solid Query v5</h1>
       <p>
-        Visit{" "}
-        <a href="https://start.solidjs.com" target="_blank">
-          start.solidjs.com
-        </a>{" "}
-        to learn how to build SolidStart apps.
+        This is just a dev release for demo. Please dont use it in production
+        yet. Also this package will be deprecated as soon as features are live
+        on @tanstack/query
       </p>
+      <div>
+        <button
+          onClick={() => {
+            setPostId((id) => (id === 1 ? 1 : id - 1));
+          }}
+        >
+          Previous Page
+        </button>
+        <button
+          onClick={() => {
+            setPostId((id) => (id === 100 ? 100 : id + 1));
+          }}
+        >
+          Next Page
+        </button>
+      </div>
+      <Suspense>
+        <For each={query.data}>
+          {(post) => (
+            <div>
+              <h3>{post.title}</h3>
+              <p>{post.body}</p>
+            </div>
+          )}
+        </For>
+      </Suspense>
     </main>
   );
 }

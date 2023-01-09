@@ -17,7 +17,13 @@ import "./root.css";
 import { QueryClient, QueryClientProvider } from "@adeora/solid-query";
 
 export default function Root() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnMount: false,
+      },
+    },
+  });
 
   return (
     <Html lang="en">
@@ -29,11 +35,12 @@ export default function Root() {
       <Body>
         <QueryClientProvider client={queryClient}>
           <ErrorBoundary>
-            <A href="/">Index</A>
-            <A href="/posts">Posts</A>
-            <Routes>
-              <FileRoutes />
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+              <A href="/">Index</A>
+              <Routes>
+                <FileRoutes />
+              </Routes>
+            </Suspense>
           </ErrorBoundary>
         </QueryClientProvider>
         <Scripts />

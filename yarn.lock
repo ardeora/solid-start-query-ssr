@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adeora/solid-query@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@adeora/solid-query/-/solid-query-0.9.0.tgz#544bcbd81125d509c511ce139910885c921b46c0"
-  integrity sha512-TiLaytRrucJehLTR6XQosse/7LlErHlEPXGQ096Zei6sUuM5ZawkVCaUfYBiSQOTU4ZGezThOtZ36AOzi59UKA==
+"@adeora/solid-query@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@adeora/solid-query/-/solid-query-0.10.0.tgz#29fd28737e367e802771f9a349c5e61829affa16"
+  integrity sha512-mRA7s5IRERNK/8KkbgDKA6rz5TWeGl+MLqxsXwGXw4Vp+OKV0mpQdQCDlKIW1lREdxZyl0BImY6oNPIRPrAQ8g==
   dependencies:
     "@tanstack/query-core" "4.20.2"
 
