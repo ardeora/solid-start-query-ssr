@@ -14,8 +14,7 @@ export default function Home() {
 
   const query = createQuery(() => ({
     queryKey: ["posts", postId()],
-    queryFn: async ({ queryKey }) => {
-      const id = queryKey[1];
+    queryFn: async () => {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/posts/" + postId()
       ).then((res) => res.json());
