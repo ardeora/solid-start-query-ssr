@@ -21,8 +21,6 @@ export default function Home() {
       ).then((res) => res.json());
       return [response] as PostData[];
     },
-    initialData: [],
-    refetchOnMount: true,
   }));
 
   return (
