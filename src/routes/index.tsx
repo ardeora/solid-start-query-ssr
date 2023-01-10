@@ -1,6 +1,7 @@
 import { Title } from "solid-start";
 import { createQuery, useQueryClient } from "@adeora/solid-query";
 import { createSignal, For, Suspense } from "solid-js";
+import { isServer } from "solid-js/web";
 
 interface PostData {
   userId: number;
@@ -20,6 +21,8 @@ export default function Home() {
       ).then((res) => res.json());
       return [response] as PostData[];
     },
+    initialData: [],
+    refetchOnMount: true,
   }));
 
   return (
